@@ -18,7 +18,7 @@ GameObject:
   - component: {fileID: 1871763574192840439}
   m_Layer: 0
   m_Name: Human
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -108,8 +108,8 @@ NavMeshAgent:
   m_Speed: 3.5
   m_Acceleration: 8
   avoidancePriority: 50
-  m_AngularSpeed: 120
-  m_StoppingDistance: 1
+  m_AngularSpeed: 200
+  m_StoppingDistance: 0.5
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
@@ -129,7 +129,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 194469887330eaa409270e290150eb27, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ID: 0
   foods: []
+  rests: []
+  wanderTime: 4
+  wanderTimer: 0
+  currentState: 0
+  currentNeed: 0
+  tirednessLevel: 0
+  hungryLevel: 0
 --- !u!135 &1871763574192840436
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -141,7 +149,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 1
+  m_Radius: 3
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &1871763574192840439
 Rigidbody:

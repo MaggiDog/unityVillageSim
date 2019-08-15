@@ -13,8 +13,8 @@ GameObject:
   - component: {fileID: 225885357694124291}
   - component: {fileID: 225885357694124348}
   - component: {fileID: 225885357694124349}
-  - component: {fileID: 225885357694124350}
   - component: {fileID: 225885357694124351}
+  - component: {fileID: -4712934523005879580}
   m_Layer: 0
   m_Name: RestHouse
   m_TagString: RestPlace
@@ -110,19 +110,6 @@ NavMeshObstacle:
   m_CarveOnlyStationary: 1
   m_Center: {x: 0, y: 0, z: 0}
   m_TimeToStationary: 0.5
---- !u!114 &225885357694124350
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 225885357694124344}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 09816b37f939a1d4281381fc3e9810dc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  guests: []
 --- !u!54 &225885357694124351
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -139,3 +126,16 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &-4712934523005879580
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 225885357694124344}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6ce36aac06d1db4cacbc0ddb742c1e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  guests: []
