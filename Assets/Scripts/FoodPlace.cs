@@ -15,6 +15,7 @@ public class FoodPlace : MonoBehaviour, IEatingPlace {
 
     public void AddGuest(GameObject guest)
     {
+        if(!guests.Contains(guest))
             guests.Add(guest);  
     }
 
@@ -54,7 +55,7 @@ public class FoodPlace : MonoBehaviour, IEatingPlace {
     private void OnTriggerEnter(Collider other)
     {
         Debug.Log(other.gameObject.tag);
-        if (other.gameObject.tag == "Player")
+        if (other.gameObject.CompareTag("Player"))
         {
             if(other.gameObject.GetComponent<Human>().CurrentNeed == (int)HumanNeeds.HUNGRY)
             {
@@ -65,10 +66,19 @@ public class FoodPlace : MonoBehaviour, IEatingPlace {
 
  
     }
+    private void OnTriggerStay(Collider other)
+    {
+        Debug.Log(other.gameObject.tag);
+        if (other.gameObject.CompareTag("Player"))
+        {
+            if (other.gameObject.GetComponent<Human>().CurrentNeed == (int)HumanNeeds.HUNGRY)
+                AddGuest(other.gameObject);
+        }
+    }
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.tag == "Player")
+        if (other.gameObject.CompareTag("Player"))
         {
             if (other.gameObject.GetComponent<Human>().CurrentNeed != (int)HumanNeeds.HUNGRY)
             {
@@ -95,7 +105,7 @@ public class FoodPlace : MonoBehaviour, IEatingPlace {
                 if (i < capacity)
                 {
                     guest.GetComponent<Human>().HungryLevel += foodQuality * Time.deltaTime;
-                    Debug.Log(guest.name + ": get Food and i is" + i);
+                  
                 }
                 i++;
 

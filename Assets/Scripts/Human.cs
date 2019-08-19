@@ -143,9 +143,9 @@ public class Human : MonoBehaviour, IHuman
 
     public void NeedsMachine()
     {
-        if (hungryLevel <= 0)
+        if (hungryLevel <= 10)
             currentNeed = (int)HumanNeeds.HUNGRY;
-        if (tirednessLevel <= 0 && hungryLevel >= 50)
+        if (tirednessLevel <= 10 && (currentNeed == (int)HumanNeeds.HUNGRY ||  currentNeed == (int)HumanNeeds.WANDER))
             currentNeed = (int)HumanNeeds.TIRED;
 
         if (tirednessLevel >= 50 && hungryLevel >= 50)
@@ -186,6 +186,8 @@ public class Human : MonoBehaviour, IHuman
             rests.Add(_obj);
         }
 
+        
+
     }
 
    
@@ -207,11 +209,12 @@ public class Human : MonoBehaviour, IHuman
     // Update is called once per frame
     void Update()
     {
+        
         NeedsMachine();
         StateMachine();
         TirednessTick(1.1f);
         HungerTick(0.25f);
-       
+
 
 
 

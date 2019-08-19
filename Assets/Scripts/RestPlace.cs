@@ -16,12 +16,8 @@ public class RestPlace : MonoBehaviour, IRestPlace
 
     public void AddGuest(GameObject guest)
     {
-        if (guests.Count < capacity)
-        {
+        if (!guests.Contains(guest))
             guests.Add(guest);
-            Debug.Log("We've got new guest");
-        }
-
     }
 
     public List<GameObject> GetGuests()
@@ -54,7 +50,7 @@ public class RestPlace : MonoBehaviour, IRestPlace
     private void OnTriggerEnter(Collider other)
     {
         Debug.Log(other.gameObject.tag);
-        if (other.gameObject.tag == "Player")
+        if (other.gameObject.CompareTag("Player"))
         {
             if (other.gameObject.GetComponent<Human>().CurrentNeed == (int)HumanNeeds.TIRED)
                 AddGuest(other.gameObject);
@@ -63,9 +59,19 @@ public class RestPlace : MonoBehaviour, IRestPlace
 
     }
 
+   private void OnTriggerStay(Collider other)
+    {
+        Debug.Log(other.gameObject.tag);
+        if (other.gameObject.CompareTag("Player"))
+        {
+            if (other.gameObject.GetComponent<Human>().CurrentNeed == (int)HumanNeeds.TIRED)
+                AddGuest(other.gameObject);
+        }
+    }
+
     private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.tag == "Player")
+        if (other.gameObject.CompareTag("Player"))
         {
             if (other.gameObject.GetComponent<Human>().CurrentNeed != (int)HumanNeeds.TIRED)
                 RemoveGuest(other.gameObject);
