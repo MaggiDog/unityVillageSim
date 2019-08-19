@@ -15,12 +15,7 @@ public class FoodPlace : MonoBehaviour, IEatingPlace {
 
     public void AddGuest(GameObject guest)
     {
-        if (guests.Count < capacity)
-        {
-            guests.Add(guest);
-            Debug.Log("We've got new guest");
-        }
-         
+            guests.Add(guest);  
     }
 
     public List<GameObject> GetGuests()
@@ -28,14 +23,18 @@ public class FoodPlace : MonoBehaviour, IEatingPlace {
         return guests;
     }
 
+  
     public void RemoveGuest()
     {
-        foreach (GameObject guest in guests)
+
+     foreach (GameObject guest in guests)
         {
             if (guest.GetComponent<Human>().HungryLevel >= 100)
             {
                 guest.GetComponent<Human>().HungryLevel = 100;
                 guests.Remove(guest);
+                
+                
             }
         }
 
@@ -45,7 +44,8 @@ public class FoodPlace : MonoBehaviour, IEatingPlace {
     public void RemoveGuest(GameObject obj)
     {
         
-                guests.Remove(obj);
+        guests.Remove(obj);
+     
             
         
 
@@ -57,7 +57,10 @@ public class FoodPlace : MonoBehaviour, IEatingPlace {
         if (other.gameObject.tag == "Player")
         {
             if(other.gameObject.GetComponent<Human>().CurrentNeed == (int)HumanNeeds.HUNGRY)
-            AddGuest(other.gameObject);
+            {
+                AddGuest(other.gameObject); 
+            }
+            
         }
 
  
@@ -68,7 +71,9 @@ public class FoodPlace : MonoBehaviour, IEatingPlace {
         if (other.gameObject.tag == "Player")
         {
             if (other.gameObject.GetComponent<Human>().CurrentNeed != (int)HumanNeeds.HUNGRY)
+            {
                 RemoveGuest(other.gameObject);
+            }
         }
     }
 
@@ -84,9 +89,15 @@ public class FoodPlace : MonoBehaviour, IEatingPlace {
         if (guests != null && guests.Count > 0)
         {
             RemoveGuest();
+            int i = 1;
             foreach (GameObject guest in guests)
             {
-                guest.GetComponent<Human>().HungryLevel += foodQuality * Time.deltaTime;
+                if (i < capacity)
+                {
+                    guest.GetComponent<Human>().HungryLevel += foodQuality * Time.deltaTime;
+                    Debug.Log(guest.name + ": get Food and i is" + i);
+                }
+                i++;
 
             }
         }

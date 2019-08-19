@@ -134,6 +134,7 @@ public class Human : MonoBehaviour, IHuman
     {
         MoveTo(FindNearestPlace(foods).transform.position);
         
+        
     }
     public void GetRest()
     {
@@ -210,8 +211,7 @@ public class Human : MonoBehaviour, IHuman
         StateMachine();
         TirednessTick(1.1f);
         HungerTick(0.25f);
-        Debug.Log("Object with ID " + ID + " status is: " + currentNeed);
-
+       
 
 
 

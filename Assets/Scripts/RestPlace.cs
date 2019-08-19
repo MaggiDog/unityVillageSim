@@ -84,12 +84,18 @@ public class RestPlace : MonoBehaviour, IRestPlace
         if (guests != null && guests.Count > 0)
         {
             RemoveGuest();
+            int i = 1;
             foreach (GameObject guest in guests)
             {
-                guest.GetComponent<Human>().TirednesslLevel += restQuality * Time.deltaTime;
+                if (i < capacity)
+                {
+                    guest.GetComponent<Human>().TirednesslLevel += restQuality * Time.deltaTime;
+                    Debug.Log(guest.name + ": get Food and i is" + i);
+                }
+                i++;
 
             }
         }
-    }
 
+    }
 }
