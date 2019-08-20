@@ -101,20 +101,23 @@ public class Human : MonoBehaviour, IHuman
      
         GameObject _obj = null;
 
-            foreach (GameObject _place in places)
+            foreach (GameObject _place in places.ToArray())
         {
-            if (_distanceMin == 0) {
+            if (_distanceMin.Equals(0)) {
                 _distanceMin = Vector3.Distance(transform.position, _place.transform.position);
                 _obj = _place;
             }
-
+            
             _distance = Vector3.Distance(transform.position, _place.transform.position);
-            if (_distance < _distanceMin)
+            if (_distance <= _distanceMin)
             {
-                _distanceMin = _distance;
-                _obj = _place;
+                
+                    _distanceMin = _distance;
+                    _obj = _place;
+                
             }
         }
+        
         return _obj;
        
     }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public class FoodPlace : MonoBehaviour, IEatingPlace { 
+public class FoodPlace : MonoBehaviour, IEatingPlace, IHouse { 
 
     public List<GameObject> guests;
     private int capacity;
@@ -28,7 +28,7 @@ public class FoodPlace : MonoBehaviour, IEatingPlace {
     public void RemoveGuest()
     {
 
-     foreach (GameObject guest in guests)
+     foreach (GameObject guest in guests.ToArray())
         {
             if (guest.GetComponent<Human>().HungryLevel >= 100)
             {
@@ -54,7 +54,7 @@ public class FoodPlace : MonoBehaviour, IEatingPlace {
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log(other.gameObject.tag);
+        
         if (other.gameObject.CompareTag("Player"))
         {
             if(other.gameObject.GetComponent<Human>().CurrentNeed == (int)HumanNeeds.HUNGRY)
@@ -68,7 +68,7 @@ public class FoodPlace : MonoBehaviour, IEatingPlace {
     }
     private void OnTriggerStay(Collider other)
     {
-        Debug.Log(other.gameObject.tag);
+       
         if (other.gameObject.CompareTag("Player"))
         {
             if (other.gameObject.GetComponent<Human>().CurrentNeed == (int)HumanNeeds.HUNGRY)
@@ -94,18 +94,23 @@ public class FoodPlace : MonoBehaviour, IEatingPlace {
         Capacity = 5;
     }
 
-    void FixedUpdate()
+    void Update()
     {
+
         if (guests != null && guests.Count > 0)
         {
             RemoveGuest();
             int i = 1;
-            foreach (GameObject guest in guests)
+            foreach(GameObject guest in guests.ToArray())
             {
                 if (i < capacity)
                 {
                     guest.GetComponent<Human>().HungryLevel += foodQuality * Time.deltaTime;
-                  
+
+                }
+                else
+                {
+                    break;
                 }
                 i++;
 

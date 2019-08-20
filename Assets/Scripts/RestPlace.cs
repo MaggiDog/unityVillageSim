@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public class RestPlace : MonoBehaviour, IRestPlace
-{
+public class RestPlace : MonoBehaviour, IRestPlace, IHouse {
 
     public List<GameObject> guests;
     private int capacity;
@@ -27,7 +26,7 @@ public class RestPlace : MonoBehaviour, IRestPlace
 
     public void RemoveGuest()
     {
-        foreach (GameObject guest in guests)
+        foreach (GameObject guest in guests.ToArray())
         {
             if (guest.GetComponent<Human>().TirednesslLevel >= 100)
             {
@@ -49,7 +48,7 @@ public class RestPlace : MonoBehaviour, IRestPlace
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log(other.gameObject.tag);
+        
         if (other.gameObject.CompareTag("Player"))
         {
             if (other.gameObject.GetComponent<Human>().CurrentNeed == (int)HumanNeeds.TIRED)
@@ -61,7 +60,7 @@ public class RestPlace : MonoBehaviour, IRestPlace
 
    private void OnTriggerStay(Collider other)
     {
-        Debug.Log(other.gameObject.tag);
+       
         if (other.gameObject.CompareTag("Player"))
         {
             if (other.gameObject.GetComponent<Human>().CurrentNeed == (int)HumanNeeds.TIRED)
@@ -91,12 +90,12 @@ public class RestPlace : MonoBehaviour, IRestPlace
         {
             RemoveGuest();
             int i = 1;
-            foreach (GameObject guest in guests)
+            foreach(GameObject guest in guests.ToArray())
             {
                 if (i < capacity)
                 {
                     guest.GetComponent<Human>().TirednesslLevel += restQuality * Time.deltaTime;
-                    Debug.Log(guest.name + ": get Food and i is" + i);
+                    
                 }
                 i++;
 
